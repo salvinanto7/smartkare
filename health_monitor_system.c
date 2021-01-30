@@ -17,7 +17,7 @@ long last_beat=0;
 float bpm;
 int beat_avg;
 
-void send_msg(int k);    //k=0 for text msg and k=1 for email
+void send_msg(int k);    //k=0 for text msg and k=1 for email and k=2 for med book and  k=3 doc book
 
 LiquidCrystal lcd(2,3,4,5,6,7);
 
@@ -93,6 +93,7 @@ void emergency(){
     if (beat_avg>=100 || beat_avg<=58)
     {
         send_msg(1);
+        send_msg(0);
     }    
 }
 
