@@ -19,6 +19,7 @@ void setup() {
   myservo1.attach(9);// attaches the servo on pin 9 to the servo object
   myservo2.attach(10);//attaches the servo on pin 10 to the servo object
   myservo3.attach(11);//attaches the servo on pin 11 to the servo object
+  myservopup.attach(6);
 }
 
 void loop() {
