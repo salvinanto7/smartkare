@@ -1,8 +1,13 @@
+#include <ESP8266WiFi.h>
+#include <ESP8266HTTPClient.h>
 #include <heartRate.h>
 #include <spo2_algorithm.h>
 #include<MAX30105.h>
 #include<LiquidCrystal.h>
 #include<Wire.h>
+
+char ssid[] = "Redmi Note 7S";     //wifi network name (local wifi used here)
+char password[] = "wunderkind";    //wifi password
 
 MAX30105 pulse_sensor;
 const byte rate = 5;
@@ -12,10 +17,29 @@ long last_beat=0;
 float bpm;
 int beat_avg;
 
+void send_msg(int k);    //k=0 for text msg and k=1 for email
+
 LiquidCrystal lcd(2,3,4,5,6,7);
 
 void setup(){
   Serial.begin(9600);
+  WiFi.mode(WIFI_STA);
+  WiFi.disconnect();
+  delay(100);
+
+  Serial.print("Connecting Wifi: ");     //connecting to network
+  Serial.println(ssid);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.print(".");
+    delay(500);
+  }
+  Serial.println("");
+  Serial.println("WiFi connected");
+  Serial.println("IP address: ");
+  IPAddress ip = WiFi.localIP();
+  Serial.println(ip);
+
   if(!pulse_sensor.begin(Wire,I2C_SPEED_FAST)){
     Serial.println("pulse sensor not found");
     while(1);
@@ -63,4 +87,26 @@ void get_bpm(){
     lcd.println("error reading bpm");
     while(1);
   }
+}
+
+void emergency(){
+    if (beat_avg>=100 || beat_avg<=58)
+    {
+        send_msg(1);
+    }    
+}
+
+void send_msg(int k){
+    HTTPClient http;
+    if(k=0){                // send text message to fam
+        http.begin("https://maker.ifttt.com/trigger/heart_rate/with/key/c5ho6kCRSDWS5XK-pnagHI?value1=1234");
+        http.GET();
+        http.end();
+    }
+    else if(k=1){            // send email to fam
+        http.begin("https://maker.ifttt.com/trigger/heart-mail/with/key/c5ho6kCRSDWS5XK-pnagHI?value1=1234");
+        http.GET();
+        http.end();
+    }
+    
 }
