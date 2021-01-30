@@ -31,12 +31,19 @@ void setup(){
 }
 
 void loop(){
-  long ir_val=pulse_sensor.getIR();
+  get_bpm();
+}
+
+void get_bpm(){
+    long ir_val=pulse_sensor.getIR();
 
   if (ir_val>7000){           // finger detected
+    lcd.setCursor(0,0);
+    lcd.println("Heart rate :");
+    lcd.setCursor(0,5);
+    lcd.println(beat_avg);
+    lcd.println("BPM");
     if(checkForBeat(ir_val)==true){
-      lcd.setCursor(0,0);
-      lcd.println("Heart rate :");
       long delta=millis()-last_beat;
       last_beat=millis();
       bpm=60/(delta/1000);
