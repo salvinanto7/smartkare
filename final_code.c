@@ -95,6 +95,7 @@ void loop(){
   get_bpm();
   emergency();
   reminder_system();
+  medbooking();
 }
 
 void reminder_system(){
