@@ -86,6 +86,9 @@ void setup(){
   String time_arr;
   int med_flag=1;
   int count=0;
+  int medi1_count=0;
+  int medi2_count=0;
+  int medi3_count=0;
 }
 
 void loop(){
@@ -166,6 +169,25 @@ void send_msg(int k){
         http.end();
     }
     
+}
+void medbooking(){
+  if(medi1_count>=8){
+        http.begin("https://maker.ifttt.com/trigger/heart/with/key/c5ho6kCRSDWS5XK-pnagHI?value1=1234");
+        http.GET();
+        http.end();
+  }
+  if (medi2_count>=7)
+  {
+        http.begin("https://maker.ifttt.com/trigger/heart/with/key/c5ho6kCRSDWS5XK-pnagHI?value1=1234");
+        http.GET();
+        http.end();
+  }
+  if(medi3_count>=7){
+        http.begin("https://maker.ifttt.com/trigger/heart/with/key/c5ho6kCRSDWS5XK-pnagHI?value1=1234");
+        http.GET();
+        http.end();
+  }
+  
 }
 
 void medicine(){
@@ -258,6 +280,7 @@ void medi1 (){
     myservo1.write(pos1);              // tell servo to go to position in variable 'pos'
     delay(15); 
     }
+    medi1_count++;
 }
 void medi2 (){
     for (pos2 = 0; pos2 <= 90; pos2 += 1) { 
@@ -269,6 +292,7 @@ void medi2 (){
     myservo2.write(pos2);              
     delay(15); 
     }
+    medi2_count++;
 }
 void medi3 (){
     for (pos3 = 0; pos3 <= 90; pos3 += 1) { 
@@ -280,6 +304,7 @@ void medi3 (){
     myservo3.write(pos3);              
     delay(15); 
     }
+    medi3_count++;
 }
 void tray (){
     for (pospup = 0; pospup <= 180; pospup += 1) { 
