@@ -172,18 +172,18 @@ void send_msg(int k){
 }
 void medbooking(){
   if(medi1_count>=8){
-        http.begin("https://maker.ifttt.com/trigger/heart/with/key/c5ho6kCRSDWS5XK-pnagHI?value1=1234");
+        http.begin("https://maker.ifttt.com/trigger/med_stock/with/key/c5ho6kCRSDWS5XK-pnagHI?value1=1234");
         http.GET();
         http.end();
   }
   if (medi2_count>=7)
   {
-        http.begin("https://maker.ifttt.com/trigger/heart/with/key/c5ho6kCRSDWS5XK-pnagHI?value1=1234");
+        http.begin("https://maker.ifttt.com/trigger/med_stock/with/key/c5ho6kCRSDWS5XK-pnagHI?value1=1234");
         http.GET();
         http.end();
   }
   if(medi3_count>=7){
-        http.begin("https://maker.ifttt.com/trigger/heart/with/key/c5ho6kCRSDWS5XK-pnagHI?value1=1234");
+        http.begin("https://maker.ifttt.com/trigger/med_stock/with/key/c5ho6kCRSDWS5XK-pnagHI?value1=1234");
         http.GET();
         http.end();
   }
