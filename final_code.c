@@ -9,7 +9,8 @@
 #include <string.h>
 #include <Servo.h>
 
-#define speaker 11              //buzzer
+#define speaker 16  
+#define pressure 14            
 DS3231 rtc(SDA, SCL);
 
 char ssid[] = "Redmi Note 7S";     //wifi network name (local wifi used here)
@@ -73,9 +74,9 @@ void setup(){
   pulse_sensor.setPulseAmplitudeGreen(0);
   lcd.begin(16,2);
   lcd.print("system display good to go");
-  myservo1.attach(9);// attaches the servo on pin 9 to the servo object
-  myservo2.attach(10);//attaches the servo on pin 10 to the servo object
-  myservo3.attach(11);//attaches the servo on pin 11 to the servo object
+  myservo1.attach(4);// attaches the servo on pin 9 to the servo object
+  myservo2.attach(0);//attaches the servo on pin 10 to the servo object
+  myservo3.attach(2);//attaches the servo on pin 11 to the servo object
   myservopup.attach(6);
   rtc.setDOW(SATURDAY);
   rtc.setTime(16, 0, 0);
@@ -89,12 +90,14 @@ void setup(){
 
 void loop(){
   get_bpm();
+  emergency();
   reminder_system();
 }
 
 void reminder_system(){
  delay(30000);  //at present 30 sec gap between each call
- Time=rtc.getTimeStr();
+ //Time=rtc.getTimeStr();
+ Time = "09:00";
   for(int i=0;i<5;i++){
     time_arr[i]=Time[i];
   }
