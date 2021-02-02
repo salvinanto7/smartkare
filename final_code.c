@@ -169,6 +169,12 @@ void send_msg(int k){
         http.GET();
         http.end();
     }
+    else if (k=2)
+    {
+        http.begin("https://maker.ifttt.com/trigger/no_food/with/key/c5ho6kCRSDWS5XK-pnagHI?value1=1234");
+        http.GET();
+        http.end();
+    }
     
 }
 void medbooking(){
@@ -218,13 +224,13 @@ void medicine(){
   }
 }
 void alarm(){             // need to add flags to show which msg to be send to fam
-  while(pressure!=0){    // pressure is the var for the preessure sensor bvelow the plate
+  while(pressure==0){    // pressure is the var for the preessure sensor bvelow the plate
     pinMode(speaker,HIGH);
     delay(300000);
     pinMode(speaker,LOW);
     count++;
     if(count==5{
-      send_msg();             //send a text msg to CARE TAKER
+      send_msg(2);             //send a text msg to CARE TAKER
       break;
     }
   }
