@@ -41,7 +41,6 @@ int pospup = 0;
 
 void send_msg(int k);    //k=0 for text msg and k=1 for email and k=2 for med book and  k=3 doc book
 
-LiquidCrystal lcd(2,3,4,5,6,7);
 
 void setup(){
   Serial.begin(9600);
