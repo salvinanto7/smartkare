@@ -1,7 +1,6 @@
 #include <kaa.h>
 #include <ArduinoJson.h>
 #include <ESP8266WiFi.h>
-#include <Adafruit_Sensor.h>
 #include <PubSubClient.h>
 #include <TinyGPS++.h>
 #include <SoftwareSerial.h>
