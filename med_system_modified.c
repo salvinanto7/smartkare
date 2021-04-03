@@ -1,6 +1,11 @@
 #include <servo.h>
 #include <TimerOne.h>
 #include <RTClib.h>
+#include <ESP8266WiFi.h>
+#include <PubSubClient.h>
+
+char ssid[] = "Redmi Note 7S";     //wifi network name (local wifi used here)
+char password[] = "wunderkind";    //wifi password
 
 servo myservo1;
 servo myservo2;
@@ -16,6 +21,23 @@ int am_food_alarm, noon_food_alarm, pm_food_alarm;
 RTC_DS1307 rtc;
 
 void setup(){
+    Serial.begin(115200);
+    WiFi.mode(WIFI_STA);
+    WiFi.disconnect();
+    delay(100);
+
+    Serial.print("Connecting Wifi: ");     //connecting to network
+    Serial.println(ssid);
+    WiFi.begin(ssid, password);
+    while (WiFi.status() != WL_CONNECTED) {
+    Serial.print(".");
+    delay(500);
+    }
+    Serial.println("");
+    Serial.println("WiFi connected");
+    Serial.println("IP address: ");
+    IPAddress ip = WiFi.localIP();
+    Serial.println(ip);
     myservo.attach(12);
     myservo.attach(13);
     myservo.attach(14);
