@@ -38,6 +38,7 @@ void setup(){
     Serial.println("IP address: ");
     IPAddress ip = WiFi.localIP();
     Serial.println(ip);
+    pinMode(16,OUTPUT);
     myservo.attach(12);
     myservo.attach(13);
     myservo.attach(14);
@@ -197,4 +198,10 @@ void appointment(){
         http.end();
     }
     appoint_flag=1;
+}
+
+void food_alarm(){
+    pinMode(16,HIGH);
+    delay(30000);
+    pinMode(16,LOW);
 }
