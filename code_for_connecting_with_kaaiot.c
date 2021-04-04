@@ -51,7 +51,8 @@ void loop() {
     lastPublish += fiveSeconds;
     DynamicJsonDocument telemetry(1023);
     telemetry.createNestedObject();                             // need to edit
-    telemetry[0]["heart rate"] = beat_avg;
+    // telemetry[0]["heart rate"] = beat_avg;                actual value to be displayed with the the sensor MAX30105
+    telemetry[0]["heart rate"]=random(65,90);
     telemetry[0]["systole"] = random(70, 95);
     telemetry[0]["diastole"]=random(100, 140);
 
@@ -169,7 +170,7 @@ void gethealth(){
     else{          //no finger detected
     beat_avg=0;
     Serial.println("no finger detected. Try again"); //debugg purose
-    while(1);
+    //while(1);    uncomment for full version of the code to work
   }
     }
 }
